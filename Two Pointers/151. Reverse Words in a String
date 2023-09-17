@@ -1,0 +1,19 @@
+stack<string> st;
+        string temp,ans;
+
+        for(int i=0 ; i<s.size() ; i++){
+            if(s[i]!=' ') temp.push_back(s[i]);
+            if(s[i]==' ' && temp.size()>0){
+                st.push(temp);
+                temp.clear();
+            }
+            if(i == s.size()-1 && temp.size()>0) st.push(temp);
+        }
+
+        while(st.size()>0){
+            ans+=st.top();
+            cout<<st.size();
+            if(st.size()>1) ans+=' ';
+            st.pop();
+        }
+        return ans;
