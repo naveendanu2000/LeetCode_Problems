@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int maxCoins(vector<int>& piles) {
+        sort(piles.begin(), piles.end());
+
+        vector<int> mine;
+        int sum = 0,size = piles.size();
+
+        while(piles.size() > size/3)
+        {
+            piles.pop_back();
+            mine.push_back(piles[piles.size()-1]);
+            piles.pop_back();
+        }
+
+        for(auto x:mine)
+        {
+            sum += x;
+        }
+
+        return sum;
+    }
+};
