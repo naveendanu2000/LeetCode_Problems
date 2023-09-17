@@ -1,0 +1,30 @@
+int p=1,flag=0,mp;
+        vector<int> ans;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            if(p==0 && nums[i] != 0 && flag==1){
+                ans.push_back(p);
+                continue;
+            }    
+            else if(nums[i] == 1 && i>0 && flag==1){
+                ans.push_back(mp);
+                continue;
+            }
+            else if(nums[i] == -1 && i>0 && flag==1){
+                ans.push_back(-mp);
+                continue;
+            }
+            p=1;
+            for(int j=0 ; j<nums.size() ; j++)
+            {
+                if(i==j)    continue;
+                p*=nums[j];
+            }
+            if(nums[i] == 1)
+            {
+                mp = p;
+                flag=1;
+            }    
+            ans.push_back(p);
+        }
+        return ans;
