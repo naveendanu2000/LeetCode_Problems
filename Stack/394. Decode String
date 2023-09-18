@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<char> st;
+        stack<int> multiplier;
+        string temp,ans,num,tp;
+
+        for(int i=0 ; i<s.size() ;i++){
+            if(s[i]>=48 && s[i]<=57){
+                while(s[i] != '['){
+                    num+=s[i];
+                    i++;
+                }
+                i--;
+                int n = stoi(num);
+                num.clear();
+                multiplier.push(n);
+            }
+            else if(s[i]!=']'){
+                st.push(s[i]);
+            }
+            else{
+                while(st.top()!='['){
+                    temp+=st.top();
+                    st.pop();
+                }
+                st.pop();
+                reverse(temp.begin(),temp.end());
+                for(int j=0 ; j<multiplier.top() ; j++){
+                    tp+=temp;
+                }
+                for(auto x:tp){
+                    st.push(x);
+                }
+                cout<<tp<<endl;
+                temp.clear();
+                tp.clear();
+                multiplier.pop();
+            }
+        }
+
+        while(!st.empty()){
+            ans.push_back(st.top());
+            st.pop();
+        }
+
+        reverse(ans.begin(),ans.end());
+        return ans;
+    }
+};
