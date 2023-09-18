@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        stack<int> st;
+
+        for(auto x:asteroids){
+            if(st.empty() || (st.top()<0 && x>0) || (st.top()>0 && x>0) || (st.top()<0 && x<0))  st.push(x);
+            else{
+                if(st.top()>0 && x<0){
+                    if(abs(x)>st.top()){
+                        while(!st.empty() && st.top()<abs(x)){
+                            cout<<"deleting"<<st.top()<<endl;
+                            st.pop();
+                            if(st.empty() || (st.top()>0 && x>0) || (st.top()<0 && x<0)){
+                                st.push(x);
+                                break;
+                            }  
+                        }   
+                    }
+
+                    if(!st.empty() && st.top() == abs(x))  st.pop();
+                }
+            }
+
+            if(!st.empty())
+            cout<<st.top()<<endl;
+            else
+            cout<<"empty"<<endl;
+        }
+        asteroids.clear();
+        while(!st.empty()){
+            asteroids.push_back(st.top());
+            st.pop();
+        }
+        reverse(asteroids.begin(),asteroids.end());
+        return asteroids;
+    }
+};
