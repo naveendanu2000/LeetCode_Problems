@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        int size=0,j;
+        while(senate.size() > 1){
+            for(int i=0 ; i<senate.size() ; i++){
+                if(senate[i] != senate[i+1] && i<senate.size()-1){
+                    senate.erase(i+1,1);
+                }
+                else{
+                    for(size=i+1, j=i+1; size<senate.size() ;size++){
+                        if(senate[i]!=senate[size]) {
+                            senate.erase(size,1);
+                            break;
+                        }
+                    }
+                    if(size == senate.size()){
+                        for(j=0 ; j<i ;j++){
+                            if(senate[i] != senate[j]){
+                                senate.erase(j,1);
+                                break;
+                            } 
+                        }
+                    }
+
+                    if(j == i) {
+                        if(senate[0] == 'D')    return "Dire";
+                        else    return "Radiant";
+                    }
+                }
+            } 
+        }
+
+        if(senate.size() == 1){
+            if(senate[0]=='D')    return "Dire";
+        }
+
+        return "Radiant";
+    }
+};
