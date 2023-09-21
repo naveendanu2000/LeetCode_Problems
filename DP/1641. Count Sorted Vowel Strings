@@ -1,0 +1,23 @@
+string s;
+        vector<char> v = {'a','e','i','o','u'};
+        vector<string> temp = {"a","e","i","o","u"};
+        vector<string> ans;
+        int count=0;
+        for(int i=1 ; i<n; i++){
+            for(int j=0 ; j<temp.size() ; j++){
+                for(auto x: v){
+                    s= temp[j];
+                    if(s[s.size()-1] <= x){
+                        s+=x;
+                        ans.push_back(s);
+                    }  
+                }
+            }
+            temp.clear();
+            for(auto x:ans){
+                temp.push_back(x);
+            }
+            ans.clear();
+        }
+        // for(auto x:temp)    cout<<x<<" ";
+        return temp.size();
