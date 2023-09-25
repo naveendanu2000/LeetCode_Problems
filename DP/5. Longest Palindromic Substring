@@ -1,0 +1,71 @@
+class Solution {
+public:
+    // Brute Force approach
+    // bool isPalindrome(string st){
+    //     for(int i=0; i<st.length()/2 ; i++)
+    //         if(st[i] != st[st.length()-1-i])    return false;
+
+    //     return true;
+    // }
+
+    // string longestPalindrome(string s) {
+    //     bool response;
+    //     int max=0;
+    //     string max_string;
+    //     string temp;
+    //     for(int i=0 ; i<s.size() ; i++){
+    //         if(max >= (s.size() - i)) break;
+    //         for(int j=i ; j<s.size() ;j++){
+    //             temp.push_back(s[j]);
+    //             if(max >= temp.size())  continue;
+    //             response = isPalindrome(temp);
+    //             if(response == true)
+    //                 if(max<temp.size()){
+    //                     max=temp.size();
+    //                     max_string = temp;
+    //                 } 
+    //         }
+    //         temp.clear();
+    //     }
+
+    //     return max_string;
+    // }
+
+
+    bool palindrome(vector<vector<bool>> &dp, int i, int j, string &s){
+        if(i == j){
+            return dp[i][j] = true;
+        }
+        if(j-i == 1){
+            if(s[i] == s[j]){
+                return dp[i][j] = true;
+            }
+            else{
+                return dp[i][j] = false;
+            }
+        }
+        if(s[i] == s[j] && dp[i+1][j-1] == true){
+            return dp[i][j] = true;
+        } else {
+            return dp[i][j] = false;
+        }
+    }
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        int min = 0; int max = 0;
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
+        for(int g=0; g<n; g++){
+            for(int i=0, j=g; j<n; i++, j++){
+                palindrome(dp, i, j, s);
+                if(dp[i][j] == true){
+                    if(j-i+1 > max){
+                        min = i;
+                        max = j-i+1;
+                    }
+                }
+            }
+        }
+        return s.substr(min, max);
+    }
+};
