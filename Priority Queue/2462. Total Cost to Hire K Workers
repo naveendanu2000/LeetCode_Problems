@@ -1,0 +1,45 @@
+class Solution {
+public:
+    long long totalCost(vector<int>& costs, int k, int candidates) {
+        if(costs.size() == 1)   return costs[0];
+        priority_queue<int,vector<int>,greater<int>> f;
+        priority_queue<int,vector<int>,greater<int>> r;
+        long long total=0;
+
+        int left=0, right=costs.size()-1;
+        while(left<right){
+            if(left >= right)   break;
+            f.push(costs[left++]);
+            r.push(costs[right--]);
+            if(left==candidates && (costs.size()-1-right)==candidates) break;
+        }
+
+        cout<<r.size()<<" "<<f.size()<<endl;
+
+        while(k>0){
+            if(!r.empty() && r.top() < f.top() || f.empty()){
+                cout<<r.top()<<" r"<<endl;
+                total+=r.top();
+                r.pop();
+                if(left <= right){
+                    cout<<" "<<costs[right]<<" "<<r.size()<<endl;
+                    r.push(costs[right]);
+                    right--;
+                }
+            }
+            else{
+                cout<<f.top()<<" l"<<endl;
+                total+=f.top();
+                f.pop();
+                if(left <= right){
+                    cout<<" "<<costs[left]<<" "<<f.size()<<endl;
+                    f.push(costs[left]);
+                    left++;
+                }
+            }
+            k--;
+        }
+
+        return total;
+    }
+};
