@@ -1,0 +1,22 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        map<int,string> m;
+        string ans;
+        int count=1,flag=0;
+        for(auto x:s){
+            m[count]+=x;
+            if(count<numRows && flag==0) count++;
+            else if(count>1 && flag==1) count--;
+
+            if(count==numRows)  flag=1;
+            else if(count==1)   flag=0;
+        }
+
+        for(auto x:m){
+            ans+=x.second;
+        }
+
+        return ans;
+    }
+};
