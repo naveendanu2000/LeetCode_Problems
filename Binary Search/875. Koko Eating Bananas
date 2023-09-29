@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int time(vector<int>& piles,int k,int h){
+        int t=0;
+        for(int i=0; i<piles.size() ; i++){
+                t += (piles[i]/k);
+                if(piles[i]%k!=0)   t++;
+                if(t>h) return t;
+        }
+        return t;
+    }
+
+    int minEatingSpeed(vector<int>& piles, int h) {
+        sort(piles.begin(),piles.end());
+
+        int left=1;
+        int right=INT_MAX;
+        while(left<right){
+            int mid=left + (right-left)/2;
+            int t = time(piles,mid,h);
+            if(t<=h) right=mid;
+            else left=mid+1;
+        }
+        return left;
+    }
+
+};
