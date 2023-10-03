@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+        int lb = 0, ub = 0;
+        int count=0,t_sum=0;
+        for(ub; ub<k; ub++){
+            t_sum+=arr[ub];
+        }
+        if(t_sum/k>=threshold)  count++;
+        cout<<t_sum<<" "<<count<<endl;
+        for(ub;ub<arr.size();lb++,ub++){
+            t_sum-=arr[lb];
+            t_sum+=arr[ub];
+            if(t_sum/k>=threshold)  count++;
+            cout<<t_sum<<" "<<count<<endl;
+        }
+
+        return count;
+    }
+};
