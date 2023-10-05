@@ -1,0 +1,80 @@
+class Solution {
+public:
+    int maxSumTwoNoOverlap(vector<int>& nums, int firstlen, int secondlen) {
+        int sf=0,ss=0,tss=0;
+        int out=0,in=0;
+        int max=INT_MIN;
+        for(out=0 ; out<firstlen ; out++){
+            sf+=nums[out];
+        }
+        for(in=out ; in<out+secondlen ; in++){
+            ss+=nums[in];
+        }
+
+        max = sf+ss;
+        for(int i=0;out+secondlen<nums.size();out++,i++){
+            tss=ss;
+            ss-=nums[out];
+            ss+=nums[out+secondlen];
+            for(int j=out,in=out+secondlen;in<nums.size();in++,j++){
+                // cout<<tss+sf<<endl;
+                // cout<<i<<" "<<out<<" "<<j<<" "<<in<<endl;
+                if(max<(sf+tss)){
+                    max = sf+tss;
+                }   
+                tss-=nums[j];
+                tss+=nums[in];
+            }
+            if(max<(sf+tss)){
+                max = sf+tss;
+            } 
+            sf-=nums[i];
+            sf+=nums[out];
+        }
+        tss=ss;
+        if(max<(sf+tss)){
+            max = sf+tss;
+        }
+
+        ss=0,sf=0;
+        for(out=0 ; out<secondlen ; out++){
+            sf+=nums[out];
+        }
+
+        for(in=out ; in < out+firstlen; in++){
+            ss+=nums[in];
+        }
+
+        if(max<sf+ss){
+            max = sf+ss;
+        }
+
+        for(int i=0;out+firstlen<nums.size();out++,i++){
+            tss=ss;
+            ss-=nums[out];
+            ss+=nums[out+firstlen];
+            for(int j=out,in=out+firstlen;in<nums.size();in++,j++){
+                // cout<<tss+sf<<endl;
+                // cout<<i<<" "<<out<<" "<<j<<" "<<in<<endl;
+                if(max<(sf+tss)){
+                    max = sf+tss;
+                }   
+                tss-=nums[j];
+                tss+=nums[in];
+            }
+            if(max<(sf+tss)){
+                max = sf+tss;
+            }
+            sf-=nums[i];
+            sf+=nums[out];
+        }
+
+        tss=ss;
+        if(max<(sf+tss)){
+            max = sf+tss;
+        }   
+
+
+        return max;
+    }
+};
