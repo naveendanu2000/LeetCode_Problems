@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        map<char,int> m;
+        int max=0,ans=0,j=0,i;
+        for(i=0; i<s.size() ;i++){
+            m[s[i]]+=1;
+            if(max<m[s[i]])    max = m[s[i]];
+
+            while((i+1-j - max)>k){
+                if(ans < i-j)   ans = i-j;
+                if(max == m[s[j]]) max--;
+                m[s[j]]--;
+                j++;
+                for(auto x:m)
+                    if(max < x.second) max = x.second;
+            }
+        }
+
+        if(ans < i-j)   ans = i-j;
+        return ans;
+    }
+};
