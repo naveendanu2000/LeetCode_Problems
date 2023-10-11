@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        int k;
+        vector<int> count(26);
+        vector<int> p_count(26);
+        vector<int>ans;
+        for(int i=0; i<p.size() ;i++){
+            p_count[p[i]-97]++;
+        }
+
+
+        for(int i=0,j=0; i<s.size() ;i++){
+            count[s[i]-97]++;
+            while(i-j+1 >= p.size()){
+                for(k=0 ;k<p_count.size();k++)
+                    if(count[k]!=p_count[k])    break;
+                
+                if(k==p_count.size()) ans.push_back(j);
+                count[s[j]-97]--; 
+                j++;
+            }
+        }
+
+        return ans;
+    }
+};
