@@ -1,0 +1,15 @@
+class Solution {
+public:
+    vector<int> pivotArray(vector<int>& nums, int pivot) {
+        vector<int>less,num,more;
+        for(int i=0 ; i<nums.size() ; i++)
+        {
+            if(nums[i]<pivot)   less.push_back(nums[i]);
+            else if(nums[i]>pivot)    more.push_back(nums[i]);
+            else num.push_back(nums[i]);
+        }
+        for(int i=0 ; i<num.size() ;i++)    less.push_back(num[i]);
+        for(int i=0 ; i<more.size() ; i++)  less.push_back(more[i]);
+
+        return less;
+    }
