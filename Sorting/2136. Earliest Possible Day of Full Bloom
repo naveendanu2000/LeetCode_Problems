@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int earliestFullBloom(vector<int>& plantTime, vector<int>& growTime) {
+        vector<vector<int>> v;
+        int max=0,ss=0;
+        for(int i=0 ; i<plantTime.size() ; i++){
+            vector<int> temp;
+            temp.push_back(growTime[i]);
+            temp.push_back(plantTime[i]);
+
+            v.push_back(temp);
+        }
+
+        //USING THIS WILL EXCEED TIME LIMIT !!
+        //BUT IT WORKS !!
+        // sort(v.begin(),v.end(),[&](auto a,auto b){
+        //     return a>b;
+        // });
+        
+        sort(v.begin(),v.end());
+
+        for(int i=v.size()-1 ; i>=0 ;i--){
+            ss +=v[i][1];
+            if(max < ss + v[i][0])  max = ss + v[i][0];
+        }
+
+        return max;
+    }
+};
