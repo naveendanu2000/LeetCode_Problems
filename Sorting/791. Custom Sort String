@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string customSortString(string order, string s) {
+        map<char,int> m;
+        map<char,int> count;
+        int i=0;
+        string ans;
+
+        for(auto x:order){
+            m[x] = i;
+            i++; 
+        }
+
+        for(auto x:s){
+            count[x]++;
+        }
+
+        for(auto x : order){
+            if(find(s.begin(),s.end(),x) == s.end())  continue;
+            string s;
+            for(int i=0 ; i<count[x] ; i++){
+                s+=x;
+            }
+            ans+=s;
+        }
+
+        for(auto x : s){
+            if(find(ans.begin(),ans.end(),x) == ans.end()){
+                string s;
+                for(int i=0 ; i<count[x] ; i++){
+                    s+=x;
+                }
+                ans+=s;
+            } 
+        }
+
+        return ans;
+    }
+};
