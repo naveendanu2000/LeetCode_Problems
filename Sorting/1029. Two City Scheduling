@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int twoCitySchedCost(vector<vector<int>>& costs) {
+        int n=0,sum=0;
+
+        for(int j=0 ; j<costs.size() ;j++){
+            sum+=costs[j][0];
+            costs[j][1] -= costs[j][0];
+        }
+        sort(costs.begin(),costs.end(),[](auto a,auto b){
+            return a[1]<b[1];
+        });
+
+        for(auto x : costs){
+            sum += x[1];
+            n++;
+            if(n == costs.size()/2)  break;    
+        }
+
+        return sum;
+    }
+};
