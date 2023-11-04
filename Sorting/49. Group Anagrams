@@ -1,0 +1,91 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        unordered_map<int,vector<string>> m;
+        vector<vector<string>> ans;
+        int size;
+        string j,a;
+        for(auto x : strs){
+            size = x.size();
+            m[size].push_back(x);
+        }
+
+        for(auto x : strs){
+            vector<string> v;
+            size = x.size();
+            j=x;
+            sort(j.begin(),j.end());
+            for(auto it = m[size].begin() ; it!=m[size].end() ;it++){
+                a = *it;
+                sort(a.begin(),a.end());
+
+                if(a == j){
+                    v.push_back(*it);
+                    m[size].erase(it);
+                    it--;
+                }
+            }
+            if(v.size()>0)  ans.push_back(v);
+        }
+
+        return ans;
+    }
+};
+        // 1st TRY TLE BUT Correct!
+
+        // vector<vector<string>> ans;
+        // string j,a;
+        // unordered_map<char,int> m;
+        // unordered_map<char,int> t;
+        
+        // while(!strs.empty()){
+        //     j = strs[0];
+        //     vector<string> v;
+        //     m.clear();
+        //     for(int k=0 ; k<j.size() ;k++)  m[j[k]]++;
+        //     for(auto i=strs.begin(); i!=strs.end() ; i++){
+        //         t.clear();
+        //         a=*i;
+        //         if(a.size()!=j.size())  continue;
+        //         for(int l=0; l<a.size() ;l++) t[a[l]]++;
+        //         for(auto y : m){
+        //             if(y.second == t[y.first]) t.erase(y.first);
+        //         }
+        //         if(t.empty()){
+        //             v.push_back(a);  
+        //             strs.erase(i);
+        //             i--;
+        //         }   
+        //     }
+
+        //     ans.push_back(v);
+        // }
+
+        // return ans;
+
+        //2nd TRY TLE BUT Correct!
+
+        // vector<vector<string>> ans;
+        // string j,a;
+
+        // while(!strs.empty()){
+        //     vector<string>v;
+        //     j = strs[0];
+        //     sort(j.begin(),j.end());
+        //     v.push_back(strs[0]);
+        //     strs.erase(strs.begin());
+        //     for(auto i=strs.begin(); i!=strs.end() ; i++){
+        //         a=*i;
+        //         if(j.size()!=a.size())  continue;
+        //         sort(a.begin(),a.end()); 
+        //         if(a==j){
+        //             v.push_back(*i);
+        //             strs.erase(i);
+        //             i--;
+        //         }
+        //     } 
+
+        //     ans.push_back(v);
+        // }
+
+        // return ans;
