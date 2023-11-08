@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int maximumTastiness(vector<int>& prices, int k) {
+        sort(prices.begin(),prices.end());
+
+        int h = prices.back() ,l = 0, m, ans;
+        vector<int> temp;
+        while(l<=h){
+            m = (l+h)/2;
+            temp.clear();
+            temp.push_back(prices[0]);
+            for(int i = 1 ; i< prices.size() ;i++){
+                if(abs(prices[i] - temp.back()) >= m)    temp.push_back(prices[i]);
+            }
+
+            if(temp.size() >= k){
+                l=m+1;
+            }
+            else{
+                h=m-1;
+            }
+        }
+
+        if(temp.size() < k) return m-1;
+        return   m;
+    }
+};
