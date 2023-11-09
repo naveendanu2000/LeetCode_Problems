@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int reductionOperations(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        map<int,int> m;
+        int k=0,ans=0;
+        for(auto x:nums)    m[x]++;
+
+        for(auto x:m){
+            if(k==0){
+                k++;
+                continue;
+            }
+
+            ans += x.second*k;
+            k++;
+        }
+
+        return ans;
+    }
+};
