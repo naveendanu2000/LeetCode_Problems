@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minimumIndex(vector<int>& nums) {
+        map<int,int> m; 
+        map<int,int> count;
+        for(auto x : nums) m[x]++;
+        int d=0,c=0;
+        for(auto x : m){
+            if(x.second > c){
+                c = x.second;
+                d = x.first;
+            } 
+        }
+
+        for(int i=0; i<nums.size()-1 ; i++){
+            count[nums[i]]++;
+            m[nums[i]]--;
+            if( ((count[d] *2) > i+1) && ((m[d] *2) > (nums.size() - (i+1))) )  return i;
+        }
+
+        return -1;
+
+    }
+};
