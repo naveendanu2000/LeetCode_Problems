@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> numSmallerByFrequency(vector<string>& queries, vector<string>& words) {
+        vector<int> count;
+        int ans;
+        for(auto x : queries){
+            ans=0;
+            sort(x.begin(),x.end());
+            char c = x.front();
+            int num=0;
+            
+            for(auto k : x){
+                if(k == c)  num++;
+                else break;
+            } 
+            for(auto y : words){
+                sort(y.begin(),y.end());
+                char ch = y.front();
+                int n = 0;
+                for(auto l : y){
+                    if(l == ch) n++;
+                    else break;
+                }
+
+                if(num < n) ans++;
+            }
+
+            count.push_back(ans);
+        }
+
+        return count;
+    }
+};
