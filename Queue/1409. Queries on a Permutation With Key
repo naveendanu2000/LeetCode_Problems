@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> processQueries(vector<int>& queries, int m) {
+        list<int> p;
+        vector<int> ans;
+        for(int i=1 ; i<=m ;i++)    p.push_back(i);
+        int pos=0;
+        for(auto x:queries){
+            pos=0;
+            for(auto i=p.begin() ; i!=p.end(); i++,pos++){
+                if(*i == x){
+                    ans.push_back(pos);
+                    int temp = *i;
+                    p.erase(i);
+                    p.push_front(temp);
+                    break;
+                }   
+            }
+        }
+
+        return ans;
+    }
+};
