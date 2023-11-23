@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+        vector<int> ans;
+        int p=0,n=0;
+
+        while(true){
+            while(p<nums.size()){
+                if(nums[p]>0){
+                    ans.push_back(nums[p]);
+                    p++;
+                    break;
+                }
+                p++;
+            }
+            while(n<nums.size()){
+                if(nums[n]<0){
+                    ans.push_back(nums[n]);
+                    n++;
+                    break;
+                }
+                n++;
+            }
+            if(n==nums.size() && p==nums.size())    break;
+        }
+
+        return ans;
+    }
+};
