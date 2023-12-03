@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int reverse(int n){
+        int ret=0,i=1; 
+        while(n>0){
+            ret = (ret*10) + n%10;
+            n /= 10;
+        }
+
+        return ret;
+    }
+
+    int countDistinctIntegers(vector<int>& nums) {
+        set<int> ans;
+        for(auto x:nums)    ans.insert(x);
+        for(auto x:ans){
+            int ret = reverse(x);
+            ans.insert(ret);
+        }
+
+        return ans.size();
+    }
+};
